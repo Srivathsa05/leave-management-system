@@ -26,13 +26,15 @@ class AuthController {
       }
 
       // Create user
-      const user = new User({
+      // Create user using object spread (triggers pre-save hook)
+      const user = await User.create({
         name,
         email,
         password,
         role: role || 'employee',
         employeeId
       });
+
 
       await user.save();
 
