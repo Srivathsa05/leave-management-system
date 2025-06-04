@@ -1,0 +1,213 @@
+.admin-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-label {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+.pending-leaves {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.leave-request {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.employee-info {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 25px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.info-group label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.info-value {
+  background-color: #c0c0c0;
+  padding: 12px 15px;
+  border-radius: 4px;
+  color: #333;
+  font-size: 1rem;
+  border: 2px solid #999;
+}
+
+.approval-section {
+  min-width: 200px;
+}
+
+.approval-options {
+  display: flex;
+  gap: 20px;
+  background-color: #c0c0c0;
+  padding: 12px 15px;
+  border-radius: 4px;
+  border: 2px solid #999;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-group input[type="radio"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.radio-group label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+
+.leave-details {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.detail-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.detail-group label {
+  font-weight: bold;
+  color: #333;
+  min-width: 80px;
+  font-size: 1.1rem;
+}
+
+.detail-value {
+  background-color: #c0c0c0;
+  padding: 12px 15px;
+  border-radius: 4px;
+  color: #333;
+  min-width: 250px;
+  font-size: 1rem;
+  border: 2px solid #999;
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.approve-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.no-leaves {
+  text-align: center;
+  padding: 60px;
+  color: #666;
+  font-size: 1.3rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .employee-info {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .leave-details {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .detail-value {
+    min-width: 100%;
+  }
+  
+  .info-group {
+    min-width: 100%;
+  }
+}
