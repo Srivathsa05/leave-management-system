@@ -16,11 +16,11 @@ const leaveBalanceSchema = new mongoose.Schema({
   },
   sickLeave: {
     type: Number,
-    default: 12
+    default: 5
   },
   casualLeave: {
     type: Number,
-    default: 12
+    default: 7
   }
 }, {
   timestamps: true

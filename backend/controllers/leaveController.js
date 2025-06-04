@@ -5,7 +5,7 @@ const moment = require('moment');
 
 class LeaveController {
   // Calculate leave days
-  calculateLeaveDays(startDate, endDate, session) {
+  calculateLeaveDays = (startDate, endDate, session) => { 
     const start = moment(startDate);
     const end = moment(endDate);
     const diffDays = end.diff(start, 'days') + 1;
@@ -17,7 +17,7 @@ class LeaveController {
   }
 
   // Apply for leave
-  async applyLeave(req, res) {
+  applyLeave = async (req, res) => {
     try {
       const { leaveType, startDate, endDate, session, reason } = req.body;
       const userId = req.user.id;
@@ -129,8 +129,8 @@ class LeaveController {
           userId,
           year: currentYear,
           earnedLeave: previousYearBalance ? previousYearBalance.earnedLeave + 12 : 12,
-          sickLeave: 12,
-          casualLeave: 12
+          sickLeave: 5,
+          casualLeave: 7
         });
         
         await leaveBalance.save();
