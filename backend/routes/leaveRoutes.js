@@ -20,6 +20,10 @@ router.get('/balance', authMiddleware, leaveController.getLeaveBalance.bind(leav
 // Get my leaves
 router.get('/my-leaves', authMiddleware, leaveController.getMyLeaves.bind(leaveController));
 
+// Calendar API routes:
+router.get('/my-approved', authMiddleware, leaveController.getMyApprovedLeaves.bind(leaveController));
+router.get('/approved', authMiddleware, leaveController.getAllApprovedLeaves.bind(leaveController));
+
 // Get pending leaves (admin only)
 router.get('/pending', authMiddleware, adminMiddleware, leaveController.getPendingLeaves.bind(leaveController));
 

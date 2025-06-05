@@ -17,7 +17,7 @@ class AuthController {
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { name, email, password, role, employeeId } = req.body;
+      const { name, email, password, role, employeeId,joiningDate } = req.body;
 
       // Check if user already exists
       const existingUser = await User.findOne({ $or: [{ email }, { employeeId }] });
@@ -32,7 +32,8 @@ class AuthController {
         email,
         password,
         role: role || 'employee',
-        employeeId
+        employeeId,
+        joiningDate,
       });
 
 

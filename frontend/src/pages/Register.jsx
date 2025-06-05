@@ -10,7 +10,8 @@ const Register = () => {
     email: "",
     password: "",
     employeeId: "",
-    role: "employee", // default to employee; you can allow admin if you want
+    role: "employee",
+    joiningDate: '', // default to employee; you can allow admin if you want
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -64,6 +65,16 @@ const Register = () => {
               <option value="employee">Employee</option>
               <option value="admin">Admin</option>
             </select>
+             <div className="form-group">
+            <label>Joining Date:</label>
+            <input
+              type="date"
+              name="joiningDate"
+              value={form.joiningDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
           </div>    
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}

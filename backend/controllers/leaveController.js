@@ -82,7 +82,7 @@ class LeaveController {
   // Update leave status (admin only)
   async updateLeaveStatus(req, res) {
     try {
-      const { leaveId, status } = req.body;
+      const { leaveId, status, rejectionReason } = req.body;
       const adminId = req.user.id;
 
       const leave = await Leave.findById(leaveId).populate('userId');
@@ -93,6 +93,12 @@ class LeaveController {
       leave.status = status;
       leave.approvedBy = adminId;
       leave.approvedDate = new Date();
+
+      if (status === 'rejected') {
+      leave.rejectionReason = rejectionReason || '';
+    } else {
+      leave.rejectionReason = undefined; // Clear reason if approved
+    }
 
       if (status === 'approved') {
         // Update leave balance
@@ -106,6 +112,7 @@ class LeaveController {
       await leave.save();
       res.json({ message: `Leave ${status} successfully`, leave });
     } catch (error) {
+      console.error(error);
       res.status(500).json({ message: error.message });
     }
   }
@@ -141,6 +148,48 @@ class LeaveController {
       res.status(500).json({ message: error.message });
     }
   }
+
+
+// For fetching the logged-in user's approved leaves for a month
+async getMyApprovedLeaves(req, res) {
+  try {
+    const userId = req.user.id;
+    const { month } = req.query; // e.g., "2025-01"
+    const start = new Date(`${month}-01`);
+    const end = new Date(start);
+    end.setMonth(end.getMonth() + 1);
+
+    const leaves = await Leave.find({
+      userId,
+      status: 'approved',
+      startDate: { $lt: end },
+      endDate: { $gte: start }
+    });
+    res.json(leaves);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+// For fetching all users' approved leaves for a month
+async getAllApprovedLeaves(req, res) {
+  try {
+    const { month } = req.query;
+    const start = new Date(`${month}-01`);
+    const end = new Date(start);
+    end.setMonth(end.getMonth() + 1);
+
+      const leaves = await Leave.find({
+    status: 'approved',
+    startDate: { $lt: end },
+    endDate: { $gte: start }
+    }).populate('userId', 'name');
+    res.json(leaves);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 }
 
 module.exports = new LeaveController();

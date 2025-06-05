@@ -28,8 +28,14 @@ export const getLeaveBalance = () => api.get('/leaves/balance');
 export const applyLeave = (leaveData) => api.post('/leaves/apply', leaveData);
 export const getMyLeaves = () => api.get('/leaves/my-leaves');
 export const getPendingLeaves = () => api.get('/leaves/pending');
-export const updateLeaveStatus = (leaveId, status) => 
-  api.put('/leaves/update-status', { leaveId, status });
+export const updateLeaveStatus = (leaveId, status, rejectionReason = '') =>
+  api.put('/leaves/update-status', { leaveId, status, rejectionReason });
+export const getMyApprovedLeaves = (month) =>
+  api.get(`/leaves/my-approved?month=${month}`);
+
+export const getAllApprovedLeaves = (month) =>
+  api.get(`/leaves/approved?month=${month}`);
+
 
 // User endpoints
 export const getAllEmployees = () => api.get('/users/employees');
