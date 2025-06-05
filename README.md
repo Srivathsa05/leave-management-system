@@ -1,4 +1,4 @@
-# 🚀 Leave Management System (LMS)
+#  Leave Management System (LMS)
 A full-stack Leave Management System built using the MERN stack that simplifies the process of requesting, approving, and tracking employee leaves. This system offers user-friendly dashboards for employees and administrators, complete with leave balances, calendars, and approval workflows.
 
 🧰 Key Features
@@ -36,27 +36,19 @@ Calendar UI	react-calendar
 🛠️ Installation & Setup
 🔁 Clone the Repository
 bash
-Copy
-Edit
 git clone https://github.com/your-username/leave-management-system.git
 cd leave-management-system
 📦 Backend Setup
 bash
-Copy
-Edit
 cd backend
 npm install
 ⚙️ Configure MongoDB
 Make sure MongoDB is running locally or set your connection string in .env or config/db.js.
-
 bash
-Copy
-Edit
 npm start
+
 🌐 Frontend Setup
 bash
-Copy
-Edit
 cd ../frontend
 npm install
 npm start
