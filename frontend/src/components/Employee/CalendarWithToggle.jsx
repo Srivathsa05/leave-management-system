@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { getMyApprovedLeaves, getAllApprovedLeaves } from "../../services/api";
 
+
 const getMonthString = (date) =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 
@@ -38,6 +39,12 @@ const CalendarWithToggle = ({ user }) => {
     return days;
   };
 
+  // Helper to check if a date is weekend
+  const isWeekend = (date) => {
+    const day = date.getDay();
+    return day === 0 || day === 6; // Sunday = 0, Saturday = 6
+  };
+
   // For "mine" mode: days the user is on leave
   const myLeaveDays = new Set(myLeaves.flatMap(getLeaveDays));
 
@@ -56,20 +63,26 @@ const CalendarWithToggle = ({ user }) => {
     });
   });
 
-  // Circle dates for "my leaves" mode
+  // Circle dates for "my leaves" mode, excluding weekends
   const tileClassName = ({ date, view }) => {
-    if (view === "month" && mode === "mine" && myLeaveDays.has(date.toDateString())) {
+    if (
+      view === "month" &&
+      mode === "mine" &&
+      myLeaveDays.has(date.toDateString()) &&
+      !isWeekend(date) // Exclude weekends
+    ) {
       return "my-leave-day";
     }
     return null;
   };
 
-  // Red number for "team" mode, with tooltip on the entire cell
+  // Red number for "team" mode, with tooltip on the entire cell, excluding weekends
   const tileContent = ({ date, view }) => {
     if (view !== "month") return null;
+    if (isWeekend(date)) return null; // Skip weekends
+
     const dateStr = date.toDateString();
     if (mode === "team" && teamLeaveCounts[dateStr]) {
-      // The title is set on the outer div, which covers the cell
       return (
         <div
           title={teamLeaveNames[dateStr]?.join(", ")}
@@ -101,7 +114,7 @@ const CalendarWithToggle = ({ user }) => {
               lineHeight: 1,
               zIndex: 2,
               pointerEvents: "none",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             {teamLeaveCounts[dateStr]}
@@ -166,16 +179,18 @@ const CalendarWithToggle = ({ user }) => {
   return (
     <div style={{ minWidth: 350, background: "#f9f9f9", borderRadius: 10, padding: 16 }}>
       <div style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
-        <span style={{
-          fontWeight: "bold",
-          fontSize: 22,
-          color: "#2345a7",
-          marginRight: 12,
-          background: "#3e5ed3",
-          borderRadius: 12,
-          padding: "8px 32px",
-          color: "#fff"
-        }}>
+        <span
+          style={{
+            fontWeight: "bold",
+            fontSize: 22,
+            color: "#2345a7",
+            marginRight: 12,
+            background: "#3e5ed3",
+            borderRadius: 12,
+            padding: "8px 32px",
+            color: "#fff",
+          }}
+        >
           Team Calendar
         </span>
         <span style={{ marginLeft: "auto", fontWeight: "bold", color: "#2345a7" }}>
@@ -199,7 +214,7 @@ const CalendarWithToggle = ({ user }) => {
           ? "Circled days: Your approved leaves"
           : "Red number: Number of employees on leave (hover for names)"}
       </div>
-      {/* Custom CSS for circled dates */}
+    
       <style>
         {`
           .my-leave-day {

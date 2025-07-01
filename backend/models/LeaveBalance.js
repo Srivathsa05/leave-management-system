@@ -12,7 +12,7 @@ const leaveBalanceSchema = new mongoose.Schema({
   },
   earnedLeave: {
     type: Number,
-    default: 12
+    default: 0
   },
   sickLeave: {
     type: Number,

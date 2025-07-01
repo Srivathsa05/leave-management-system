@@ -57,7 +57,8 @@ class AuthController {
           name: user.name,
           email: user.email,
           role: user.role,
-          employeeId: user.employeeId
+          employeeId: user.employeeId,
+          joiningDate: user.joiningDate
         }
       });
     } catch (error) {
@@ -97,7 +98,8 @@ class AuthController {
           name: user.name,
           email: user.email,
           role: user.role,
-          employeeId: user.employeeId
+          employeeId: user.employeeId,
+          joiningDate: user.joiningDate
         }
       });
     } catch (error) {
